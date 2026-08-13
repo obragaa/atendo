@@ -1,4 +1,4 @@
-# setup-windows.ps1 — instala WSL2 + Docker Desktop e sobe o Atendo completo.
+﻿# setup-windows.ps1 — instala WSL2 + Docker Desktop e sobe o Atendo completo.
 #
 # Como usar: clique com o botão direito neste arquivo > "Executar com o
 # PowerShell" e aceite o aviso de administrador (UAC). Ou, num PowerShell
