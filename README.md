@@ -138,4 +138,12 @@ migrations/        001_init.sql (schema + RLS + role da aplicação)
 tests/             65 testes que rodam offline
 ```
 
-As decisões de arquitetura — com as alternativas descartadas e o que faria mudar de ideia — estão em [DECISIONS.md](DECISIONS.md). A especificação que guiou a construção está em [SPEC.md](SPEC.md).
+## Documentação
+
+| Documento | Para quem |
+|---|---|
+| [docs/dossie-tecnico.pdf](docs/dossie-tecnico.pdf) | Quem é de TI: arquitetura, modelos, custo, decisões |
+| [docs/guia-didatico.pdf](docs/guia-didatico.pdf) | Quem não é: o que é o produto, analogias, roteiro de demo |
+| [SECURITY.md](SECURITY.md) | Modelo de ameaças e repasse de segurança item a item |
+| [DECISIONS.md](DECISIONS.md) | Cada decisão com a alternativa descartada e o que faria mudar de ideia |
+| [SPEC.md](SPEC.md) | A especificação que guiou a construção, fase a fase |
