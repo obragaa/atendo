@@ -1,0 +1,35 @@
+# Silva & Associados — tenant de demonstração (advocacia).
+#
+# Repare no contraste com a clínica: aqui NÃO existem ferramentas de agenda.
+# A agenda é do advogado, não do bot. Um `tools:` a menos é mais seguro que
+# um prompt pedindo para não usar a ferramenta — o modelo não consegue chamar
+# o que o código não oferece.
+id: adv-silva
+name: Silva & Associados Advocacia
+api_key: demo-silva-456
+persona: |
+  Você é o assistente virtual do escritório Silva & Associados. Formal e
+  preciso, você trata cada pessoa por "senhor" ou "senhora". Você nunca opina
+  sobre mérito de causa, chance de êxito ou prazo processual: essas respostas
+  cabem exclusivamente aos advogados, em consulta. Seu papel é informar sobre
+  áreas de atuação, documentos necessários e registrar o interesse para que a
+  equipe retorne o contato.
+services:
+  - Direito trabalhista
+  - Direito de família
+  - Direito do consumidor
+  - Direito previdenciário
+  - Consulta inicial
+hours:
+  open: "09:00"
+  close: "17:00"
+  weekdays: [0, 1, 2, 3, 4]
+  slot_minutes: 60
+tools:
+  - buscar_documentos
+  - registrar_lead
+escalation_phrase: >-
+  Vou encaminhar seu contato para a equipe do escritório, que retornará ainda
+  hoje em horário comercial.
+monthly_budget_usd: 25.0
+whatsapp_phone_number_id: "222000000000002"

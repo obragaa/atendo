@@ -1,0 +1,65 @@
+# Sobe o Atendo completo: Postgres+pgvector, Redis, API e Jaeger.
+#   docker compose up -d --build && make seed
+# As migrations rodam automaticamente na primeira subida do banco.
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: atendo
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      # 127.0.0.1: portas de infraestrutura nunca ficam expostas na rede
+      # local — só a própria máquina enxerga banco, Redis e Jaeger.
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d atendo"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      # A API conecta com o role atendo_app (não superusuário): é o que faz
+      # a Row Level Security valer de verdade.
+      DATABASE_URL: postgresql://atendo_app:atendo_app@db:5432/atendo
+      REDIS_URL: redis://redis:6379/0
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OTEL_ENABLED: ${OTEL_ENABLED:-true}
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
+    env_file:
+      - path: .env
+        required: false
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "127.0.0.1:16686:16686"  # UI de traces
+      - "127.0.0.1:4318:4318"    # OTLP HTTP
+
+volumes:
+  pgdata:

@@ -1,0 +1,79 @@
+# CI do Atendo: qualidade em todo push; avaliação de comportamento em PR.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  qualidade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: Lint
+        run: ruff check .
+      - name: Testes
+        run: python -m pytest -q
+
+  # A avaliação chama o modelo real e bloqueia o merge quando a taxa de
+  # acerto cai. Sem ANTHROPIC_API_KEY configurada, o passo é PULADO com
+  # aviso — pular é honesto; passar em falso, não.
+  avaliacao:
+    if: github.event_name == 'pull_request'
+    needs: qualidade
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: atendo
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U postgres -d atendo"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 12
+      redis:
+        image: redis:7-alpine
+        ports:
+          - "6379:6379"
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 12
+    env:
+      DATABASE_URL: postgresql://atendo_app:atendo_app@localhost:5432/atendo
+      REDIS_URL: redis://localhost:6379/0
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Aplicar migrations
+        env:
+          PGPASSWORD: postgres
+        run: psql -h localhost -U postgres -d atendo -f migrations/001_init.sql
+      - name: Rodar avaliação
+        if: env.ANTHROPIC_API_KEY != ''
+        run: python -m evals.runner --min-pass-rate 0.85 --json evals-report.json
+      - name: Avaliação pulada (sem chave)
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "ANTHROPIC_API_KEY ausente - avaliacao pulada, nao aprovada em falso."
+      - name: Publicar relatório
+        if: ${{ always() && hashFiles('evals-report.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: evals-report
+          path: evals-report.json

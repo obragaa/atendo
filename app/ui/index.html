@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Atendo — console de atendimento</title>
+<style>
+  :root {
+    --bg: #0a0e13;
+    --panel: #10161d;
+    --panel-2: #141c25;
+    --border: #1d2937;
+    --text: #d7dee6;
+    --muted: #79899a;
+    --accent: #3ddc97;
+    --amber: #ffc857;
+    --danger: #ff7a7a;
+    --user: #16222e;
+    --mono: ui-monospace, "Cascadia Code", "Cascadia Mono", Consolas, "Courier New", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(1200px 600px at 70% -10%, #101a26 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---- topo ---- */
+  .topo {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 14px 22px; border-bottom: 1px solid var(--border);
+  }
+  .marca { font-family: var(--mono); font-size: 20px; letter-spacing: .5px; }
+  .marca .dot { color: var(--accent); }
+  .marca .sub { display: block; font-size: 11.5px; color: var(--muted); letter-spacing: 0; }
+  .seletor { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .8px; }
+  .seletor select {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 10px; font: inherit; font-size: 14px;
+    text-transform: none; letter-spacing: 0; min-width: 260px; cursor: pointer;
+  }
+
+  /* ---- layout ---- */
+  .layout {
+    display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px;
+    max-width: 1100px; margin: 0 auto; padding: 18px 22px 26px;
+    min-height: calc(100vh - 70px);
+  }
+
+  /* ---- chat ---- */
+  .chat {
+    display: flex; flex-direction: column; min-width: 0;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden;
+  }
+  .thread { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 12px; white-space: pre-wrap;
+    overflow-wrap: break-word; animation: surge .18s ease-out; }
+  .msg.user { align-self: flex-end; background: var(--user); border: 1px solid #23384c;
+    border-bottom-right-radius: 4px; }
+  .msg.bot { align-self: flex-start; background: var(--panel-2); border: 1px solid var(--border);
+    border-bottom-left-radius: 4px; }
+  .msg.erro { align-self: stretch; max-width: none; background: #2a1416; border: 1px solid #4b2226;
+    color: var(--danger); font-size: 14px; }
+  .msg.erro code { font-family: var(--mono); color: var(--amber); }
+  @keyframes surge { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; } }
+
+  /* o recibo: prova visual de que cada resposta é auditável */
+  .recibo {
+    margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--muted); line-height: 1.7;
+  }
+  .recibo .custo { color: var(--amber); }
+  .recibo .ok { color: var(--accent); }
+  .recibo .alerta { color: var(--danger); }
+
+  .pensando { align-self: flex-start; color: var(--muted); font-family: var(--mono); font-size: 13px;
+    padding: 6px 2px; }
+  .pensando .p { animation: pisca 1.2s infinite; display: inline-block; }
+  .pensando .p:nth-child(2) { animation-delay: .2s; }
+  .pensando .p:nth-child(3) { animation-delay: .4s; }
+  @keyframes pisca { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+
+  /* estado vazio com sugestões */
+  .vazio { margin: auto; text-align: center; padding: 30px 20px; max-width: 460px; }
+  .vazio h1 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .vazio p { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; }
+  .sugestoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .sugestoes button {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 13px; cursor: pointer;
+    transition: border-color .15s ease;
+  }
+  .sugestoes button:hover { border-color: var(--accent); }
+
+  /* composer */
+  .composer { display: flex; gap: 10px; padding: 14px; border-top: 1px solid var(--border);
+    background: var(--panel); }
+  .composer textarea {
+    flex: 1; resize: none; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+    font: inherit; min-height: 44px; max-height: 140px;
+  }
+  .composer button {
+    background: var(--accent); color: #06251a; border: 0; border-radius: 10px;
+    padding: 0 20px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .composer button:disabled { opacity: .45; cursor: not-allowed; }
+
+  /* ---- painel lateral ---- */
+  .painel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .card h2 { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .9px;
+    margin-bottom: 8px; font-weight: 600; }
+  .custo-total { font-family: var(--mono); font-size: 30px; color: var(--amber); line-height: 1.1; }
+  .custo-legenda { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stats > div { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 12px; }
+  .stats dt { font-size: 11px; color: var(--muted); }
+  .stats dd { font-family: var(--mono); font-size: 18px; margin-top: 2px; }
+  .nova {
+    background: transparent; color: var(--text); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px; font: inherit; cursor: pointer;
+  }
+  .nova:hover { border-color: var(--accent); }
+  .nota { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .nota strong { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; min-height: 0; }
+    .chat { min-height: 62vh; }
+    .seletor select { min-width: 170px; }
+    .msg { max-width: 92%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">
+      atendo<span class="dot">_</span>
+      <span class="sub">atendimento multi-tenant com custo por conversa</span>
+    </div>
+    <label class="seletor">cliente
+      <select id="tenant" aria-label="Selecionar cliente de demonstração"></select>
+    </label>
+  </header>
+
+  <main class="layout">
+    <section class="chat" aria-label="Conversa com o agente">
+      <div id="thread" class="thread" aria-live="polite"></div>
+      <form id="composer" class="composer">
+        <textarea id="entrada" rows="1" placeholder="Escreva sua mensagem… (Enter envia)"
+          aria-label="Sua mensagem"></textarea>
+        <button type="submit" id="enviar">enviar</button>
+      </form>
+    </section>
+
+    <aside class="painel" aria-label="Métricas da conversa">
+      <div class="card">
+        <h2>custo da conversa</h2>
+        <p class="custo-total" id="custo-total">$0.00000</p>
+        <p class="custo-legenda">soma das chamadas de modelo desta conversa</p>
+      </div>
+      <div class="card">
+        <h2>métricas</h2>
+        <dl class="stats">
+          <div><dt>mensagens</dt><dd id="st-msgs">0</dd></div>
+          <div><dt>acertos de cache</dt><dd id="st-cache">0</dd></div>
+          <div><dt>latência média</dt><dd id="st-lat">—</dd></div>
+          <div><dt>escalonamentos</dt><dd id="st-esc">0</dd></div>
+        </dl>
+      </div>
+      <button class="nova" id="nova">nova conversa</button>
+      <p class="nota"><strong>O recibo</strong> sob cada resposta mostra as ferramentas
+        chamadas, se veio do cache, o custo em USD e a latência — cada conversa
+        é auditável e o custo é conhecido, não estimado.</p>
+    </aside>
+  </main>
+
+<script>
+"use strict";
+
+// Chaves de demonstração — as mesmas dos YAML em tenants/ (intencional).
+const TENANTS = {
+  "clinica-sorriso": {
+    nome: "Clínica Sorriso — odontologia",
+    chave: "demo-sorriso-123",
+    boasVindas: "Sol, da Clínica Sorriso, pronta para atender.",
+    sugestoes: [
+      "Quanto custa a limpeza?",
+      "Vocês atendem o convênio OdontoMais?",
+      "Quero agendar uma avaliação",
+      "Qual o endereço da clínica?",
+    ],
+  },
+  "adv-silva": {
+    nome: "Silva & Associados — advocacia",
+    chave: "demo-silva-456",
+    boasVindas: "Assistente do Silva & Associados à disposição.",
+    sugestoes: [
+      "Vocês atuam em direito trabalhista?",
+      "Quais documentos levo na consulta inicial?",
+      "Quanto custa a consulta?",
+    ],
+  },
+};
+
+const $ = (id) => document.getElementById(id);
+const thread = $("thread"), entrada = $("entrada"), enviar = $("enviar");
+
+// Estado por tenant: trocar de cliente troca de conversa sem perder a outra.
+const estados = {};
+function estadoDe(id) {
+  if (!estados[id]) {
+    estados[id] = { conversationId: null, mensagens: [], custo: 0, cache: 0,
+                    escalados: 0, latencias: [] };
+  }
+  return estados[id];
+}
+let tenantAtual = "clinica-sorriso";
+
+// ---- seletor de tenant ----
+const seletor = $("tenant");
+for (const [id, t] of Object.entries(TENANTS)) {
+  const opt = document.createElement("option");
+  opt.value = id; opt.textContent = t.nome;
+  seletor.appendChild(opt);
+}
+seletor.addEventListener("change", () => { tenantAtual = seletor.value; render(); });
+
+// ---- renderização ----
+function render() {
+  const estado = estadoDe(tenantAtual);
+  thread.replaceChildren();
+  if (estado.mensagens.length === 0) {
+    thread.appendChild(telaVazia());
+  } else {
+    for (const m of estado.mensagens) thread.appendChild(noDeMensagem(m));
+  }
+  thread.scrollTop = thread.scrollHeight;
+  atualizaPainel();
+}
+
+function telaVazia() {
+  const raiz = document.createElement("div");
+  raiz.className = "vazio";
+  const h = document.createElement("h1");
+  h.textContent = TENANTS[tenantAtual].boasVindas;
+  const p = document.createElement("p");
+  p.textContent = "Este agente responde com base nos documentos deste cliente. " +
+    "Experimente uma pergunta — ou tente pedir um desconto e veja o que acontece.";
+  const chips = document.createElement("div");
+  chips.className = "sugestoes";
+  for (const s of TENANTS[tenantAtual].sugestoes) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = s;
+    b.addEventListener("click", () => enviaMensagem(s));
+    chips.appendChild(b);
+  }
+  raiz.append(h, p, chips);
+  return raiz;
+}
+
+function noDeMensagem(m) {
+  const no = document.createElement("div");
+  if (m.tipo === "erro") {
+    no.className = "msg erro";
+    no.append(...m.partes);
+    return no;
+  }
+  no.className = "msg " + (m.tipo === "user" ? "user" : "bot");
+  no.textContent = m.texto;
+  if (m.recibo) no.appendChild(noDeRecibo(m.recibo));
+  return no;
+}
+
+function noDeRecibo(r) {
+  const div = document.createElement("div");
+  div.className = "recibo";
+
+  const ferramentas = document.createElement("span");
+  ferramentas.textContent = r.tools_used.length ? r.tools_used.join(", ") : "sem ferramentas";
+
+  const cache = document.createElement("span");
+  cache.textContent = "cache: " + (r.cached ? "hit" : "não");
+  if (r.cached) cache.className = "ok";
+
+  const custo = document.createElement("span");
+  custo.className = "custo";
+  custo.textContent = "$" + r.cost_usd.toFixed(5);
+
+  const lat = document.createElement("span");
+  lat.textContent = r.latency_ms + " ms";
+
+  const partes = [ferramentas, cache, custo, lat];
+  if (r.escalated) {
+    const esc = document.createElement("span");
+    esc.className = "alerta"; esc.textContent = "escalado";
+    partes.push(esc);
+  }
+  partes.forEach((p, i) => {
+    if (i > 0) div.append("  ·  ");
+    div.append(p);
+  });
+  return div;
+}
+
+function atualizaPainel() {
+  const e = estadoDe(tenantAtual);
+  $("custo-total").textContent = "$" + e.custo.toFixed(5);
+  $("st-msgs").textContent = e.mensagens.filter(m => m.tipo !== "erro").length;
+  $("st-cache").textContent = e.cache;
+  $("st-esc").textContent = e.escalados;
+  const media = e.latencias.length
+    ? Math.round(e.latencias.reduce((a, b) => a + b, 0) / e.latencias.length) + " ms"
+    : "—";
+  $("st-lat").textContent = media;
+}
+
+// ---- envio ----
+async function enviaMensagem(texto) {
+  texto = (texto || "").trim();
+  if (!texto) return;
+  const tenantId = tenantAtual;
+  const estado = estadoDe(tenantId);
+
+  estado.mensagens.push({ tipo: "user", texto });
+  render();
+  entrada.value = "";
+  enviar.disabled = true;
+
+  const pensando = document.createElement("div");
+  pensando.className = "pensando"; pensando.setAttribute("role", "status");
+  pensando.setAttribute("aria-label", "O agente está respondendo");
+  for (let i = 0; i < 3; i++) {
+    const p = document.createElement("span");
+    p.className = "p"; p.textContent = "●";
+    pensando.appendChild(p);
+  }
+  thread.appendChild(pensando);
+  thread.scrollTop = thread.scrollHeight;
+
+  try {
+    const resposta = await fetch("/chat", {
+      method: "POST",
+      headers: { "content-type": "application/json", "X-Api-Key": TENANTS[tenantId].chave },
+      body: JSON.stringify({ message: texto, conversation_id: estado.conversationId }),
+    });
+    if (!resposta.ok) {
+      estado.mensagens.push({ tipo: "erro", partes: partesDeErroHttp(resposta.status) });
+    } else {
+      const dados = await resposta.json();
+      estado.conversationId = dados.conversation_id;
+      estado.custo += dados.cost_usd;
+      if (dados.cached) estado.cache += 1;
+      if (dados.escalated) estado.escalados += 1;
+      if (dados.latency_ms > 0) estado.latencias.push(dados.latency_ms);
+      estado.mensagens.push({ tipo: "bot", texto: dados.reply, recibo: dados });
+    }
+  } catch {
+    estado.mensagens.push({ tipo: "erro", partes: partesDeErroRede() });
+  } finally {
+    enviar.disabled = false;
+    if (tenantAtual === tenantId) render();
+    entrada.focus();
+  }
+}
+
+function code(texto) {
+  const c = document.createElement("code");
+  c.textContent = texto;
+  return c;
+}
+
+function partesDeErroRede() {
+  return ["Não consegui falar com a API. Os serviços estão no ar? Suba com ",
+          code("docker compose up -d"), " e tente de novo."];
+}
+
+function partesDeErroHttp(status) {
+  if (status === 401) return ["A chave de API foi rejeitada. Confira as chaves de demo em ",
+                              code("tenants/*.yaml"), "."];
+  if (status === 429) return ["Limite de mensagens por minuto atingido. Aguarde alguns " +
+                              "segundos e tente de novo."];
+  if (status === 503) return ["O modelo ainda não foi configurado. Coloque sua ",
+                              code("ANTHROPIC_API_KEY"), " no arquivo ", code(".env"),
+                              " e rode ", code("docker compose up -d"), " de novo."];
+  return ["O servidor respondeu com erro (" + status + "). Tente novamente; se persistir, " +
+          "veja os logs com ", code("make logs"), "."];
+}
+
+// ---- eventos ----
+$("composer").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  enviaMensagem(entrada.value);
+});
+entrada.addEventListener("keydown", (ev) => {
+  if (ev.key === "Enter" && !ev.shiftKey) {
+    ev.preventDefault();
+    enviaMensagem(entrada.value);
+  }
+});
+$("nova").addEventListener("click", () => {
+  estados[tenantAtual] = undefined;
+  render();
+  entrada.focus();
+});
+
+render();
+entrada.focus();
+</script>
+</body>
+</html>

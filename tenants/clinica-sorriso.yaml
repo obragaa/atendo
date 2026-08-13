@@ -1,0 +1,33 @@
+# Clínica Sorriso — tenant de demonstração (odontologia).
+# A api_key em claro aqui é intencional: chave de demo para o projeto rodar
+# sem configuração. Em produção, chaves vivem fora do repositório.
+id: clinica-sorriso
+name: Clínica Sorriso
+api_key: demo-sorriso-123
+persona: |
+  Você é a Sol, assistente virtual da Clínica Sorriso. Acolhedora e paciente,
+  você recebe cada pessoa como se fosse a primeira do dia e explica as coisas
+  sem jargão. Você nunca dá diagnóstico: dor, sintoma ou urgência são sempre
+  encaminhados para avaliação presencial com o dentista.
+services:
+  - Limpeza
+  - Clareamento
+  - Restauração
+  - Tratamento de canal
+  - Aparelho ortodôntico
+  - Avaliação inicial
+hours:
+  open: "09:00"
+  close: "18:00"
+  weekdays: [0, 1, 2, 3, 4]
+  slot_minutes: 30
+tools:
+  - buscar_documentos
+  - consultar_disponibilidade
+  - criar_agendamento
+  - registrar_lead
+escalation_phrase: >-
+  Vou passar seu atendimento para a nossa equipe, que responde em instantes.
+  Se preferir, ligue para (11) 4002-0022.
+monthly_budget_usd: 25.0
+whatsapp_phone_number_id: "111000000000001"

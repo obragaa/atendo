@@ -1,0 +1,26 @@
+# Lint e formatação em uma ferramenta só (substitui black + flake8 + isort).
+line-length = 100
+target-version = "py312"
+
+[lint]
+select = [
+    "E",   # pycodestyle (erros)
+    "W",   # pycodestyle (avisos)
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # bugbear
+    "SIM", # simplificações
+    "C4",  # comprehensions
+    "RUF", # regras do próprio ruff
+]
+# RUF001-003: texto em português usa pontuação tipográfica legítima.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[lint.flake8-bugbear]
+# Depends()/Header() em default de parâmetro é o idioma do FastAPI.
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Header", "fastapi.Query"]
+
+[lint.per-file-ignores]
+# Imports de módulos nos __init__ podem ficar sem __all__.
+"__init__.py" = ["F401"]
