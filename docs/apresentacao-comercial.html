@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Atendo — Apresentação</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --tinta: #14202B; --suave: #5C6E7E; --verde: #0E9F6E; --verde-escuro: #0A7A54;
+    --verde-claro: #E6F5EF; --ambar: #9A6700; --ambar-claro: #FBF3E0;
+    --papel: #FFFFFF; --papel-2: #F3F7F6; --borda: #DCE5E3;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; color: var(--tinta);
+    font-size: 11pt; line-height: 1.6; background: var(--papel); }
+  .pagina { width: 210mm; min-height: 296mm; margin: 0 auto; padding: 18mm 17mm;
+    position: relative; }
+  .quebra { break-before: page; }
+  .no-break { break-inside: avoid; }
+
+  h1 { font-size: 33pt; line-height: 1.06; letter-spacing: -.6pt; }
+  h1 .destaque { color: var(--verde); }
+  h2 { font-size: 19pt; letter-spacing: -.3pt; margin-bottom: 4pt; }
+  h3 { font-size: 12pt; margin-bottom: 2pt; }
+
+  .selo { display: inline-block; background: var(--verde); color: #fff;
+    border-radius: 999px; padding: 4pt 14pt; font-size: 9.5pt; font-weight: 600;
+    letter-spacing: .5pt; margin-bottom: 12pt; }
+  .lede { font-size: 13.5pt; color: var(--suave); margin-top: 10pt; max-width: 150mm; }
+  .lede b { color: var(--tinta); }
+
+  /* conversa ilustrativa */
+  .conversa { margin: 16pt 0 6pt; background: var(--papel-2); border: 1px solid var(--borda);
+    border-radius: 14pt; padding: 14pt 16pt; max-width: 150mm; }
+  .balao { max-width: 78%; padding: 8pt 12pt; border-radius: 11pt; font-size: 10.5pt;
+    margin-top: 8pt; }
+  .balao.cliente { background: #fff; border: 1px solid var(--borda);
+    border-bottom-left-radius: 3pt; }
+  .balao.robo { background: var(--verde-claro); border: 1px solid #BFE5D6;
+    border-bottom-right-radius: 3pt; margin-left: auto; }
+  .hora { font-size: 8pt; color: var(--suave); margin-top: 2pt; }
+  .balao.robo .hora { text-align: right; }
+
+  .dores { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9pt; margin-top: 12pt; }
+  .dor { background: #fff; border: 1px solid var(--borda); border-left: 3pt solid var(--ambar);
+    border-radius: 9pt; padding: 10pt 12pt; }
+  .dor b { display: block; font-size: 11pt; margin-bottom: 2pt; }
+  .dor p { font-size: 9.5pt; color: var(--suave); }
+
+  .faixa-verde { background: var(--verde-claro); border: 1px solid #BFE5D6;
+    border-radius: 12pt; padding: 13pt 16pt; margin-top: 14pt; }
+  .faixa-verde h3 { color: var(--verde-escuro); font-size: 13pt; }
+  .faixa-verde p { font-size: 10.5pt; }
+
+  .beneficios { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin-top: 12pt; }
+  .beneficio { display: grid; grid-template-columns: 18pt 1fr; gap: 8pt; align-items: start; }
+  .check { width: 15pt; height: 15pt; border-radius: 50%; background: var(--verde);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 10pt; font-weight: 700; margin-top: 2pt; }
+  .beneficio b { display: block; font-size: 11pt; }
+  .beneficio p { font-size: 9.8pt; color: var(--suave); }
+
+  .antesdepois { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin-top: 12pt; }
+  .coluna-ad { border-radius: 11pt; padding: 12pt 14pt; }
+  .coluna-ad.antes { background: #FBF0F0; border: 1px solid #EBD3D3; }
+  .coluna-ad.depois { background: var(--verde-claro); border: 1px solid #BFE5D6; }
+  .coluna-ad h3 { font-size: 11.5pt; text-transform: uppercase; letter-spacing: 1pt; }
+  .coluna-ad.antes h3 { color: #A33B3B; }
+  .coluna-ad.depois h3 { color: var(--verde-escuro); }
+  .coluna-ad ul { list-style: none; padding: 0; margin-top: 6pt; }
+  .coluna-ad li { font-size: 10pt; padding: 4pt 0; border-bottom: 1px dashed rgba(0,0,0,.08); }
+  .coluna-ad li:last-child { border-bottom: 0; }
+
+  .numeros { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9pt; margin-top: 12pt; }
+  .numero { background: var(--tinta); color: #fff; border-radius: 11pt; padding: 12pt 14pt;
+    text-align: center; }
+  .numero .grande { font-size: 21pt; font-weight: 700; color: #7BE8BF; line-height: 1.15; }
+  .numero p { font-size: 9pt; color: #B9C6D2; margin-top: 2pt; }
+
+  .publico { display: flex; flex-wrap: wrap; gap: 7pt; margin-top: 10pt; }
+  .chip { background: #fff; border: 1px solid var(--borda); border-radius: 999px;
+    padding: 5pt 13pt; font-size: 10pt; }
+
+  .rodape-cta { margin-top: 18pt; background: var(--tinta); color: #fff;
+    border-radius: 14pt; padding: 16pt 20pt; }
+  .rodape-cta h2 { color: #fff; font-size: 16pt; }
+  .rodape-cta p { color: #B9C6D2; font-size: 10.5pt; margin-top: 4pt; }
+  .rodape-cta .marca { color: #7BE8BF; font-weight: 700; }
+
+  .miolo-titulo { margin-top: 22pt; }
+  .sub { color: var(--suave); font-size: 11pt; margin-top: 4pt; max-width: 160mm; }
+  .nota { font-size: 8.5pt; color: var(--suave); margin-top: 14pt; }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1: A PROMESSA ============ -->
+<div class="pagina">
+  <span class="selo">ATENDO · ATENDIMENTO QUE NÃO DORME</span>
+  <h1>Seu cliente pergunta.<br>Sua empresa responde <span class="destaque">na hora.</span><br>Mesmo às 23h de domingo.</h1>
+  <p class="lede">O Atendo é um <b>atendente virtual</b> que trabalha no WhatsApp e no
+    site da sua empresa: responde dúvidas com as <b>suas</b> informações, marca
+    horários na <b>sua</b> agenda e anota o contato de quem se interessou —
+    <b>24 horas por dia, 7 dias por semana</b>, por uma fração do custo de uma
+    pessoa.</p>
+
+  <div class="conversa no-break" aria-label="Exemplo de conversa">
+    <div class="balao cliente">Oi! Quanto custa a limpeza? Vocês atendem o convênio OdontoMais?
+      <div class="hora">domingo, 23h04</div></div>
+    <div class="balao robo">Olá! A limpeza custa R$ 250, com pagamento em dinheiro, PIX ou
+      cartão em até 6 vezes. E sim, atendemos o OdontoMais — para conveniados a avaliação
+      inicial é gratuita. Quer que eu veja um horário para você?
+      <div class="hora">domingo, 23h04 · respondido em 2 segundos</div></div>
+    <div class="balao cliente">Quero sim! Pode ser terça de manhã?
+      <div class="hora">domingo, 23h05</div></div>
+    <div class="balao robo">Na terça tenho 09:00, 09:30 e 11:00 livres. Qual prefere?
+      <div class="hora">domingo, 23h05</div></div>
+  </div>
+
+  <h2 class="miolo-titulo">Quanto negócio você perde enquanto ninguém responde?</h2>
+  <div class="dores no-break">
+    <div class="dor"><b>O cliente não espera</b>
+      <p>Quem manda mensagem à noite e não recebe resposta marca com o concorrente que
+        respondeu primeiro. É assim que se perde venda sem nem ficar sabendo.</p></div>
+    <div class="dor"><b>Sua equipe repete o dia inteiro</b>
+      <p>"Qual o preço?", "onde fica?", "aceita convênio?" — as mesmas 10 perguntas
+        ocupam horas de quem deveria estar cuidando de quem está na sua frente.</p></div>
+    <div class="dor"><b>Interessado sem registro é dinheiro perdido</b>
+      <p>A pessoa perguntou, ninguém anotou, ninguém retornou. Sem registro, não existe
+        follow-up — e o interesse esfria.</p></div>
+  </div>
+
+  <div class="faixa-verde no-break">
+    <h3>A ideia do Atendo em uma frase</h3>
+    <p>Um atendente que <b>estudou a sua empresa</b> — seus preços, seus serviços, suas
+      regras, seus horários — e que responde por ela com educação e precisão, o tempo
+      todo, sem folga, sem fila e sem mau humor. O que ele não sabe, ele não inventa:
+      encaminha para a sua equipe.</p>
+  </div>
+</div>
+
+<!-- ============ PÁGINA 2: DIFERENCIAIS E RESULTADO ============ -->
+<div class="pagina quebra">
+  <h2>Por que ele é diferente dos robôs que você já viu</h2>
+  <p class="sub">Todo mundo já sofreu com robô de atendimento que responde errado ou
+    trava. O Atendo foi construído ao contrário: primeiro as garantias, depois a
+    conversa.</p>
+
+  <div class="beneficios no-break">
+    <div class="beneficio"><span class="check">✓</span><div>
+      <b>Ele não inventa resposta</b>
+      <p>Só responde o que está nos documentos da sua empresa. Preço, prazo e condição
+        saem do seu material — não da imaginação do robô. Se não sabe, diz que vai
+        verificar e passa para a equipe.</p></div></div>
+    <div class="beneficio"><span class="check">✓</span><div>
+      <b>Ninguém "engana" ele</b>
+      <p>Cliente esperto pedindo desconto "porque o dono deixou"? Não funciona. Regras de
+        preço e política são travadas — conversa não muda contrato.</p></div></div>
+    <div class="beneficio"><span class="check">✓</span><div>
+      <b>Ele conhece o limite dele</b>
+      <p>Dúvida de saúde vai para o dentista. Questão jurídica vai para o advogado. E ele
+        só mexe na agenda se você permitir — em alguns negócios, agenda é sagrada.</p></div></div>
+    <div class="beneficio"><span class="check">✓</span><div>
+      <b>Você vê o custo de cada conversa</b>
+      <p>Cada atendimento tem um "recibo": quanto custou (centavos!) e quanto demorou.
+        No fim do mês, você sabe exatamente o que pagou e pelo quê. Transparência total.</p></div></div>
+    <div class="beneficio"><span class="check">✓</span><div>
+      <b>Seus dados ficam só com você</b>
+      <p>Cada empresa tem um cofre separado. Suas conversas, seus clientes e seus preços
+        nunca se misturam com os de outra empresa — isso é garantido pela estrutura do
+        sistema, não por promessa.</p></div></div>
+    <div class="beneficio"><span class="check">✓</span><div>
+      <b>Qualidade vigiada por testes</b>
+      <p>Antes de qualquer mudança entrar no ar, o robô passa por uma bateria de provas —
+        incluindo pegadinhas. Se errar mais do que o permitido, a mudança não entra.</p></div></div>
+  </div>
+
+  <h2 class="miolo-titulo">O que muda na prática</h2>
+  <div class="antesdepois no-break">
+    <div class="coluna-ad antes">
+      <h3>Sem o Atendo</h3>
+      <ul>
+        <li>Mensagem fora do horário fica sem resposta até o dia seguinte</li>
+        <li>Recepção para tudo para responder "quanto custa?"</li>
+        <li>Agendamento depende de alguém livre para atender</li>
+        <li>Interessados se perdem sem registro nem retorno</li>
+        <li>Custo do atendimento: invisível</li>
+      </ul>
+    </div>
+    <div class="coluna-ad depois">
+      <h3>Com o Atendo</h3>
+      <ul>
+        <li>Resposta em segundos, de madrugada, no feriado, sempre</li>
+        <li>Perguntas repetidas respondidas sozinhas, sem ocupar ninguém</li>
+        <li>Horário consultado e marcado na hora, direto na conversa</li>
+        <li>Todo interessado registrado com nome e telefone para retorno</li>
+        <li>Custo por conversa medido em centavos, visível num painel</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="numeros no-break">
+    <div class="numero"><div class="grande">segundos</div>
+      <p>é o tempo de resposta, a qualquer hora do dia ou da noite</p></div>
+    <div class="numero"><div class="grande">centavos</div>
+      <p>é o custo típico de uma conversa completa — e você vê cada um</p></div>
+    <div class="numero"><div class="grande">1 dia</div>
+      <p>é o que leva para colocar uma nova empresa no ar, com as informações dela</p></div>
+  </div>
+
+  <h2 class="miolo-titulo">Para quem é</h2>
+  <p class="sub">Qualquer negócio que vive de agenda e de responder rápido:</p>
+  <div class="publico no-break">
+    <span class="chip">Clínicas e consultórios</span>
+    <span class="chip">Escritórios de advocacia</span>
+    <span class="chip">Salões e barbearias</span>
+    <span class="chip">Academias e estúdios</span>
+    <span class="chip">Oficinas e assistências</span>
+    <span class="chip">Escolas e cursos</span>
+    <span class="chip">Imobiliárias</span>
+    <span class="chip">Pet shops e veterinárias</span>
+  </div>
+
+  <div class="rodape-cta no-break">
+    <h2>Quer ver funcionando com as informações da <span class="marca">sua</span> empresa?</h2>
+    <p>A demonstração leva 15 minutos: você me passa sua tabela de preços e suas regras,
+      e conversa com o seu próprio atendimento — perguntando o que quiser, inclusive
+      tentando pegá-lo no erro. <b style="color:#fff">Atendo</b> — atendimento que não
+      dorme, não inventa e não estoura seu orçamento.</p>
+  </div>
+
+  <p class="nota">Atendo · documento de apresentação · os exemplos de conversa usam a
+    empresa fictícia "Clínica Sorriso" · detalhes técnicos disponíveis no dossiê técnico
+    para a sua equipe de TI</p>
+</div>
+
+</body>
+</html>
