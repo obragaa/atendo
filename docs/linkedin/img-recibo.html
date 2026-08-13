@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Imagem — Recibo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1080px; height: 1080px; background: #0B1016; overflow: hidden;
+    font-family: "Segoe UI", system-ui, sans-serif; color: #D7DEE6;
+    display: flex; flex-direction: column; padding: 110px 100px; position: relative; }
+  .marca { font-family: Consolas, monospace; font-size: 30px; }
+  .marca b { color: #3FDC9B; font-weight: 400; }
+  .meio { flex: 1; display: flex; flex-direction: column; justify-content: center;
+    gap: 44px; }
+  h1 { font-size: 72px; line-height: 1.14; letter-spacing: -1px; font-weight: 700; }
+  h1 .money { color: #FFC857; font-family: Consolas, monospace; }
+  .recibo-box { background: #121A23; border: 3px solid #1E2B39; border-radius: 24px;
+    padding: 48px 52px; }
+  .recibo-box .resposta { font-size: 38px; line-height: 1.45; color: #D7DEE6; }
+  .recibo-box .linha { border-top: 3px dashed #2A3B4D; margin: 34px 0 26px; }
+  .recibo-box .recibo { font-family: Consolas, monospace; font-size: 30px;
+    color: #8296A8; }
+  .recibo-box .recibo .money { color: #FFC857; }
+  .sub { font-size: 34px; line-height: 1.5; color: #A8B8C6; }
+  .sub b { color: #D7DEE6; }
+  .rodape { position: absolute; bottom: 70px; left: 100px; right: 100px;
+    display: flex; justify-content: space-between; font-family: Consolas, monospace;
+    font-size: 22px; color: #5C7288; }
+</style>
+</head>
+<body>
+  <div class="marca">atendo<b>_</b></div>
+  <div class="meio">
+    <h1>Quanto custou esta conversa?<br><span class="money">$0.00342.</span><br>Eu sei — porque medi.</h1>
+    <div class="recibo-box">
+      <p class="resposta">"A limpeza custa R$ 250, com pagamento em dinheiro, PIX ou
+        cartão em até 6 vezes."</p>
+      <div class="linha"></div>
+      <p class="recibo">buscar_documentos · cache: não · <span class="money">$0.00342</span> · 812 ms</p>
+    </div>
+    <p class="sub">Todo atendimento do meu agente de IA sai com um <b>recibo</b>.
+      Quantos sistemas na sua empresa conseguem dizer o próprio custo?</p>
+  </div>
+  <div class="rodape"><span>github.com/obragaa/atendo</span><span>atendimento que não dorme</span></div>
+</body>
+</html>

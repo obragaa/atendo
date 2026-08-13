@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Carrossel — A conta do atendimento</title>
+<style>
+  @page { size: 1080pt 1080pt; margin: 0; }
+  * { box-sizing: border-box; margin: 0; }
+  body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; }
+  .slide { width: 1080pt; height: 1080pt; padding: 96pt 88pt; background: #0B1016;
+    color: #D7DEE6; display: flex; flex-direction: column; page-break-after: always;
+    position: relative; overflow: hidden; }
+  .slide:last-child { page-break-after: auto; }
+  .marca { font-family: Consolas, monospace; font-size: 26pt; }
+  .marca b { color: #3FDC9B; font-weight: 400; }
+  .rotulo { font-family: Consolas, monospace; font-size: 20pt; letter-spacing: 6pt;
+    color: #FFC857; text-transform: uppercase; margin-bottom: 28pt; }
+  .rotulo.verde { color: #3FDC9B; }
+  .rodape { position: absolute; bottom: 60pt; left: 88pt; right: 88pt; display: flex;
+    justify-content: space-between; font-family: Consolas, monospace; font-size: 19pt;
+    color: #5C7288; }
+  h1 { font-size: 76pt; line-height: 1.1; letter-spacing: -1pt; font-weight: 700; }
+  h2 { font-size: 54pt; line-height: 1.16; letter-spacing: -.5pt; font-weight: 700; }
+  .verde { color: #3FDC9B; } .ambar { color: #FFC857; }
+  .corpo { font-size: 30pt; line-height: 1.5; color: #A8B8C6; }
+  .corpo b { color: #D7DEE6; }
+  .meio { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 32pt; }
+
+  .conta { background: #121A23; border: 2pt solid #1E2B39; border-radius: 20pt;
+    padding: 40pt 44pt; font-family: Consolas, monospace; }
+  .conta .linha { display: flex; justify-content: space-between; font-size: 28pt;
+    color: #A8B8C6; padding: 12pt 0; border-bottom: 1pt dashed #2A3B4D; }
+  .conta .linha:last-child { border-bottom: 0; }
+  .conta .linha .v { color: #D7DEE6; }
+  .conta .total { display: flex; justify-content: space-between; font-size: 34pt;
+    color: #FF8080; font-weight: 700; padding-top: 20pt; margin-top: 8pt;
+    border-top: 3pt solid #2A3B4D; }
+  .conta.boa .total { color: #3FDC9B; }
+
+  .lista { display: flex; flex-direction: column; gap: 18pt; }
+  .item { display: flex; gap: 20pt; font-size: 29pt; line-height: 1.4; }
+  .item .v { color: #3FDC9B; font-family: Consolas, monospace; font-weight: 700; }
+  .recibo-mini { font-family: Consolas, monospace; font-size: 25pt; color: #8296A8;
+    background: #121A23; border: 2pt solid #1E2B39; border-radius: 14pt;
+    padding: 22pt 28pt; }
+  .recibo-mini .money { color: #FFC857; }
+  .cta-box { background: #FFC857; color: #14202B; border-radius: 20pt;
+    padding: 32pt 38pt; font-size: 32pt; font-weight: 700; line-height: 1.35; }
+  .nota { font-size: 20pt; color: #5C7288; }
+</style>
+</head>
+<body>
+
+<!-- S1 capa -->
+<div class="slide">
+  <div class="marca">atendo<b>_</b></div>
+  <div class="meio">
+    <h1>Quanto custa o cliente que <span class="ambar">você não respondeu?</span></h1>
+    <p class="corpo">Spoiler: muito mais do que custaria responder <b>todos eles,
+      para sempre, em segundos</b>. Faça a conta comigo. 👇</p>
+  </div>
+  <div class="rodape"><span>a matemática do atendimento</span><span>arrasta →</span></div>
+</div>
+
+<!-- S2 a conta da perda -->
+<div class="slide">
+  <p class="rotulo">A conta que ninguém faz</p>
+  <div class="meio">
+    <h2>Exemplo: uma clínica comum.</h2>
+    <div class="conta">
+      <div class="linha"><span>mensagens fora do horário / semana</span><span class="v">~15</span></div>
+      <div class="linha"><span>que fecham se respondidas rápido</span><span class="v">2 a 3</span></div>
+      <div class="linha"><span>ticket médio de um tratamento</span><span class="v">R$ 300+</span></div>
+      <div class="total"><span>perda potencial / mês</span><span>R$ 2.400 a 3.600</span></div>
+    </div>
+    <p class="nota">Números ilustrativos — troque pelos seus e faça a SUA conta.
+      Dói, né?</p>
+  </div>
+  <div class="rodape"><span>atendo_</span><span>2 / 6</span></div>
+</div>
+
+<!-- S3 o outro lado -->
+<div class="slide">
+  <p class="rotulo verde">O outro lado da conta</p>
+  <div class="meio">
+    <h2>E se cada mensagem fosse respondida em <span class="verde">segundos?</span></h2>
+    <div class="conta boa">
+      <div class="linha"><span>custo típico por conversa com IA</span><span class="v">centavos</span></div>
+      <div class="linha"><span>1.000 conversas / mês</span><span class="v">R$ 25 a 60</span></div>
+      <div class="linha"><span>disponibilidade</span><span class="v">24 h / 7 dias</span></div>
+      <div class="total"><span>e cada centavo</span><span>medido num painel</span></div>
+    </div>
+    <div class="recibo-mini">recibo real de uma resposta →
+      fonte consultada · <span class="money">$0.00342</span> · 812 ms</div>
+  </div>
+  <div class="rodape"><span>atendo_</span><span>3 / 6</span></div>
+</div>
+
+<!-- S4 o que faz -->
+<div class="slide">
+  <p class="rotulo verde">O que o atendente virtual faz</p>
+  <div class="meio">
+    <div class="lista">
+      <div class="item"><span class="v">✓</span><span><b>Responde com as SUAS
+        informações</b> — preços, convênios, políticas, endereço</span></div>
+      <div class="item"><span class="v">✓</span><span><b>Marca horário</b> direto na
+        conversa, sem agendamento duplicado</span></div>
+      <div class="item"><span class="v">✓</span><span><b>Registra interessados</b> com
+        nome e telefone para sua equipe retornar</span></div>
+      <div class="item"><span class="v">✓</span><span><b>Passa para humanos</b> tudo que
+        merece um humano — sintoma, caso jurídico, exceção</span></div>
+    </div>
+    <p class="corpo">E a sua equipe volta a cuidar de quem está <b>na frente dela</b>.</p>
+  </div>
+  <div class="rodape"><span>atendo_</span><span>4 / 6</span></div>
+</div>
+
+<!-- S5 garantias -->
+<div class="slide">
+  <p class="rotulo verde">Sem os sustos dos robôs comuns</p>
+  <div class="meio">
+    <div class="lista">
+      <div class="item"><span class="v">✓</span><span>O que ele não sabe, <b>não
+        inventa</b> — diz que vai confirmar e encaminha</span></div>
+      <div class="item"><span class="v">✓</span><span><b>Ninguém convence</b> ele a dar
+        desconto — nem fingindo ser o dono (tem teste provando)</span></div>
+      <div class="item"><span class="v">✓</span><span>Seus dados num <b>cofre
+        separado</b> — nunca se misturam com outra empresa</span></div>
+      <div class="item"><span class="v">✓</span><span>Teto de gasto mensal — <b>surpresa
+        na fatura não existe</b></span></div>
+    </div>
+  </div>
+  <div class="rodape"><span>atendo_</span><span>5 / 6</span></div>
+</div>
+
+<!-- S6 CTA -->
+<div class="slide">
+  <p class="rotulo verde">Refaça a conta</p>
+  <div class="meio">
+    <h2>R$ 2.400 escorrendo <span class="ambar">vs</span> centavos por conversa.</h2>
+    <p class="corpo">Um sistema desses não exige mais meses de projeto nem orçamento de
+      dezenas de milhares — sabendo usar IA com método, ele nasce <b>em dias, sob medida
+      para a sua operação</b>.</p>
+    <div class="cta-box">Quer ver funcionando com os dados da SUA empresa?
+      Demonstração de 15 minutos. Me chama na DM. 📩</div>
+  </div>
+  <div class="rodape"><span>atendo_ · atendimento que não dorme</span><span>6 / 6</span></div>
+</div>
+
+</body>
+</html>
