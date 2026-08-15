@@ -1,0 +1,37 @@
+═══════════════════════════════════════════════════════════════════
+POST 9 — ENQUETE · público: todos
+gatilho: participação de baixo esforço · siga as instruções abaixo
+═══════════════════════════════════════════════════════════════════
+
+TEXTO DO POST (cole no corpo da enquete):
+
+Pergunta honesta para quem tem (ou trabalha em) empresa que atende pelo WhatsApp: o que acontece com a mensagem que chega às 22h?
+
+Contexto: construí recentemente um sistema que responde em segundos, 24/7, com as informações da empresa — e descobri que o problema não é a tecnologia (ela ficou barata). É que a maioria nem mede quantas mensagens perde.
+
+Vota aí — o resultado me diz qual conteúdo trago a seguir. 👇
+
+═══════════════════════════════════════════════════════════════════
+CONFIGURAÇÃO DA ENQUETE
+═══════════════════════════════════════════════════════════════════
+
+Pergunta: Sua empresa responde clientes fora do horário comercial?
+
+Opção 1: Sim, alguém responde na hora
+Opção 2: Só no dia seguinte 😬
+Opção 3: Depende de quem viu a mensagem
+Opção 4: Nem sei quantas chegam à noite
+
+Duração: 1 semana
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+1. LinkedIn → Começar publicação → (⋯ Mais) → "Criar enquete"
+2. Preencha a pergunta e as 4 opções acima → duração: 1 semana
+3. Cole o texto do post no corpo → Publicar
+4. Quando: semana 3 do calendário (terça-feira).
+5. AO ENCERRAR a enquete: comente o resultado ("X% respondem só no dia
+   seguinte…") e publique o Post 4 (a conta da perda) 2–3 dias depois,
+   citando a enquete — sequência natural que converte.

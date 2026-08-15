@@ -1,0 +1,48 @@
+═══════════════════════════════════════════════════════════════════
+POST 2 — BASTIDORES TÉCNICOS · público: devs e recrutadores
+gatilho: autoridade + prova · copie o bloco abaixo
+═══════════════════════════════════════════════════════════════════
+
+"Melhorei o prompt" é opinião. Teste automatizado é fato.
+
+Construí o Atendo (agente de atendimento multi-tenant) em poucos dias, usando IA como copiloto de engenharia — e o que prova que ele não é código descartável são justamente as decisões. As que mais me orgulham ficaram de FORA:
+
+❌ Sem LangChain — o loop do agente tem ~60 linhas de Python legível. Framework esconderia exatamente a parte que precisa ser depurável.
+
+❌ Sem banco vetorial dedicado — pgvector no Postgres que já estava lá. Uma dependência a menos, backup único, transação com o resto.
+
+❌ Sem classificador de roteamento de modelo — o barato (Claude Haiku) atende tudo; o caro (Sonnet) só entra quando o barato falha DE VERDADE. Regra que não adivinha não erra.
+
+E as que ficaram dentro:
+
+✅ Row Level Security no Postgres com role sem privilégios — um WHERE esquecido devolve zero linhas, nunca dados de outro cliente.
+
+✅ Suíte de avaliação comportamental no CI: 8 casos com gabarito, incluindo injeção de prompt. Abaixo de 85% de acerto, o merge é bloqueado.
+
+✅ 74 testes que rodam em 1,5 segundo sem banco, sem Redis e sem chave de API — dublê para tudo que é externo.
+
+✅ Cada centavo de cada chamada de modelo gravado em usage_events — cost_per_conversation_usd é a métrica que precifica a mensalidade.
+
+Stack: Python 3.12, FastAPI, PostgreSQL 16 + pgvector, Redis, API da Anthropic via httpx puro, OpenTelemetry, Docker Compose, GitHub Actions.
+
+O DECISIONS.md documenta cada escolha com a alternativa descartada e o que me faria mudar de ideia. Link no primeiro comentário. 👇
+
+#Python #FastAPI #PostgreSQL #LLM #EngenhariaDeSoftware #IA
+
+═══════════════════════════════════════════════════════════════════
+PRIMEIRO COMENTÁRIO
+═══════════════════════════════════════════════════════════════════
+
+Repositório completo: https://github.com/obragaa/atendo
+
+Os PDFs em docs/ têm a versão técnica (dossiê) e a versão para quem não é de TI. E o SECURITY.md traz o repasse de segurança item a item.
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+- Mídia: carrossel de prints — o recibo na UI, o diagrama de arquitetura
+  do dossiê, um trecho do DECISIONS.md e o CI verde na aba Actions.
+  (Alternativa rápida: sem mídia, texto puro também funciona neste post.)
+- Quando: semana 2 do calendário (quarta-feira, 8h–10h).
+- Responda comentários técnicos com profundidade — recrutador lê thread.

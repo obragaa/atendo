@@ -1,0 +1,45 @@
+═══════════════════════════════════════════════════════════════════
+POST 8 — A JORNADA · público: rede ampla, recrutadores, conexões
+gatilho: identificação + inspiração · copie o bloco abaixo
+═══════════════════════════════════════════════════════════════════
+
+Uma coisa que aprendi construindo meu último projeto:
+
+a habilidade mais valiosa de 2026 não é escrever código. É saber EXATAMENTE o que exigir dele.
+
+Construí um sistema de atendimento com IA — do banco de dados à interface, da segurança à documentação — em poucos dias. Não porque digito rápido: porque mudei meu papel.
+
+Deixei de ser a pessoa que escreve cada linha e virei a pessoa que:
+
+→ escreve a especificação que não deixa margem para "achismo"
+→ define o que é inaceitável (inventar preço, vazar dado, estourar custo)
+→ exige o teste que prova cada regra
+→ revisa cada decisão como se fosse dinheiro meu em produção
+
+A IA escreveu muito código comigo. Mas especificação, critério e ceticismo — isso não se terceiriza.
+
+Resultado: um sistema que uma software house entregaria em meses, pronto em dias, documentado em três níveis (até minha avó entenderia o guia), e com uma suíte de testes que me deixa dormir tranquilo.
+
+Se você é dev: aprenda a orquestrar, não só a digitar.
+Se você tem uma empresa: o custo de automatizar despencou — quem souber aproveitar primeiro, larga na frente.
+
+O projeto está aberto no primeiro comentário. E minha DM também. 🚀
+
+#Carreira #IA #Desenvolvimento #Produtividade #FuturoDoTrabalho
+
+═══════════════════════════════════════════════════════════════════
+PRIMEIRO COMENTÁRIO
+═══════════════════════════════════════════════════════════════════
+
+O projeto: https://github.com/obragaa/atendo — com a documentação em três níveis na pasta docs/ (para leigos, para donos de negócio e para engenheiros).
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+- Mídia: reaproveite docs\linkedin\carrossel-post1.pdf, ou publique sem
+  mídia (storytelling puro também funciona).
+- Quando: semana 6 do calendário (quarta-feira, 8h–10h) — fecha a
+  campanha voltando ao pessoal.
+- Este é o post que recrutadores salvam: deixe o perfil impecável antes
+  (foto, título, destaque com o repo fixado).

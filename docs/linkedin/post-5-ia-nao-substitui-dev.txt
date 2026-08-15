@@ -1,0 +1,46 @@
+═══════════════════════════════════════════════════════════════════
+POST 5 — IA NÃO SUBSTITUI DEV · público: devs, tech leads, CTOs
+gatilho: polêmica construtiva + identidade · copie o bloco abaixo
+═══════════════════════════════════════════════════════════════════
+
+"IA vai substituir programador" é o debate errado.
+
+A pergunta certa: por que dois devs com a mesma ferramenta entregam resultados tão diferentes?
+
+Eu construí um agente de atendimento multi-tenant em poucos dias usando IA pesadamente. E o que saiu do outro lado NÃO foi código descartável:
+
+— 74 testes automatizados rodando em 1,5 segundo
+— suíte de avaliação comportamental que BLOQUEIA merge se o agente ceder a um golpe de engenharia social
+— isolamento entre clientes imposto pelo banco (RLS), não por um if
+— cada decisão documentada com a alternativa descartada
+
+A diferença não está na IA. Está no que você exige dela:
+
+1. Especificação antes de código. A IA executa mil vezes melhor quando o contrato está escrito.
+2. Testes como cerca, não como enfeite. Ela refatora sem medo quando a suíte segura.
+3. Revisão de segurança como fase, não como remendo.
+4. Decisões documentadas — porque quem revisa a arquitetura ainda sou eu.
+
+IA não substitui engenheiro. Ela AMPLIFICA o que você já é: quem entrega código frágil, agora entrega código frágil mais rápido. Quem tem método, entrega sistema de produção em dias.
+
+O projeto está aberto — julgue o código, não o discurso. Link no primeiro comentário.
+
+Concorda ou discorda? Me conta aí embaixo. 👇
+
+#DesenvolvimentoDeSoftware #IA #EngenhariaDeSoftware #Python #Carreira
+
+═══════════════════════════════════════════════════════════════════
+PRIMEIRO COMENTÁRIO
+═══════════════════════════════════════════════════════════════════
+
+O repositório completo, com DECISIONS.md e SECURITY.md: https://github.com/obragaa/atendo
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+- Mídia: NENHUMA — texto puro performa melhor em post de opinião.
+  (Se quiser, use img-recibo.png, mas o texto sozinho é mais forte aqui.)
+- Quando: semana 5 do calendário (terça-feira, 8h–10h).
+- Este post foi feito para gerar debate: responda quem discordar com
+  respeito e argumento — a discussão é o combustível. Não delete crítica.

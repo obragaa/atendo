@@ -1,0 +1,44 @@
+═══════════════════════════════════════════════════════════════════
+POST 3 — VISÃO DE NEGÓCIO · público: donos de empresa e clientes
+gatilho: dor concreta (as 23h de domingo) · copie o bloco abaixo
+═══════════════════════════════════════════════════════════════════
+
+São 23h de domingo. Alguém manda mensagem para a clínica:
+"Quanto custa a limpeza? Vocês atendem meu convênio?"
+
+Na maioria das empresas, essa mensagem espera até segunda de manhã.
+Só que o cliente não espera: ele manda a mesma pergunta para o concorrente — e marca com quem responder primeiro.
+
+Construí o Atendo para esse momento exato.
+
+É um atendente virtual que estudou a SUA empresa — preços, serviços, regras, horários — e responde por ela em segundos, a qualquer hora. Marca horário na agenda. Anota quem se interessou para a equipe retornar.
+
+E com três garantias que robô comum não dá:
+
+1️⃣ O que ele não sabe, ele não inventa — encaminha para a equipe.
+2️⃣ Ninguém convence ele a dar desconto que você não autorizou.
+3️⃣ Você vê o custo de cada conversa, em centavos, num painel.
+
+Cabe em clínica, escritório, salão, academia, oficina, imobiliária — colocar uma empresa nova no ar leva um dia.
+
+E aqui está a parte que quase ninguém conta: um sistema desses não precisa mais de meses de projeto nem de orçamento de dezenas de milhares. Sabendo usar IA com método, ele nasce em dias — e sob medida para a SUA operação.
+
+Quer ver funcionando com as informações do seu negócio? A demonstração leva 15 minutos. Me chama. 📩
+
+#Atendimento #PequenasEmpresas #WhatsApp #IA #Automacao #Empreendedorismo
+
+═══════════════════════════════════════════════════════════════════
+PRIMEIRO COMENTÁRIO
+═══════════════════════════════════════════════════════════════════
+
+Para quem é de TI e quer ver por dentro: https://github.com/obragaa/atendo
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+- Mídia: a página 1 do apresentacao-comercial.pdf como imagem (abra o
+  PDF, dê zoom na página e tire um print), ou o vídeo da demo.
+- Quando: semana 5 do calendário (sexta-feira, 8h–10h).
+- Todo comentário de dono de negócio é LEAD: responda e puxe para a DM
+  oferecendo a demonstração de 15 minutos.

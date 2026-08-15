@@ -1,0 +1,39 @@
+═══════════════════════════════════════════════════════════════════
+POST 4 — A CONTA DA PERDA · público: donos de pequenas empresas
+gatilho: aversão à perda + urgência · copie o bloco abaixo
+═══════════════════════════════════════════════════════════════════
+
+Fiz uma conta que incomoda.
+
+Uma clínica comum recebe ~15 mensagens fora do horário por semana.
+Se 2 ou 3 fechariam tratamento com resposta rápida, e o ticket médio é R$ 300… são R$ 2.400 a R$ 3.600 POR MÊS escorrendo em silêncio.
+
+(Números ilustrativos — troque pelos seus. A sua conta dói mais ou menos?)
+
+O detalhe cruel: essa perda não aparece em relatório nenhum. Cliente que não foi respondido não reclama — ele simplesmente marca com o concorrente e você nunca fica sabendo que ele existiu.
+
+Do outro lado da balança: um atendente com IA que responde em segundos, 24/7, com as informações da SUA empresa, custa CENTAVOS por conversa. E no sistema que eu construí, cada centavo aparece num painel — medido, não estimado.
+
+Não estou falando de robô que inventa resposta: ele não promete o que você não autorizou, não dá diagnóstico, não mistura seus dados com os de ninguém — e o que não sabe, passa para a sua equipe.
+
+A matemática completa está nos slides. 👇
+
+Se a conta da perda te incomodou, me chama na DM: em 15 minutos eu te mostro funcionando com os dados do seu negócio.
+
+#PequenasEmpresas #Atendimento #IA #Automacao #Gestao
+
+═══════════════════════════════════════════════════════════════════
+PRIMEIRO COMENTÁRIO
+═══════════════════════════════════════════════════════════════════
+
+Para quem quiser ver por dentro (ou mostrar pro seu TI): https://github.com/obragaa/atendo — código aberto e documentado.
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+- Mídia: anexe docs\linkedin\carrossel-conta.pdf como DOCUMENTO
+  (título sugerido: "A conta que ninguém faz")
+- Quando: semana 3 do calendário (sexta-feira, 8h–10h) — ideal logo
+  após o resultado da enquete (post 9), como sequência natural.
+- Comentários de donos de negócio = leads → DM com a demo de 15 min.

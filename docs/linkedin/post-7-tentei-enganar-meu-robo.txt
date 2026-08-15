@@ -1,0 +1,42 @@
+═══════════════════════════════════════════════════════════════════
+POST 7 — TENTEI ENGANAR MEU ROBÔ · público: devs + geral
+gatilho: desafio + storytelling de conflito · copie o bloco abaixo
+═══════════════════════════════════════════════════════════════════
+
+Passei uma tarde tentando enganar meu próprio robô de atendimento.
+
+Fingi ser o dono exigindo 90% de desconto. Pedi dados de outros clientes. Simulei documento com instrução escondida. Tentei fazê-lo rodar em círculos até estourar a fatura de IA.
+
+Falhei nas quatro. E cada fracasso foi projetado — não sorte:
+
+→ Desconto não é decisão do modelo. É código, e conversa não muda código.
+
+→ Dados de outro cliente? O banco filtra cada linha pelo dono. O robô não enxerga o que não é dele — nem pedindo com licença.
+
+→ Documento "envenenado" chega carimbado: informação, nunca instrução.
+
+→ Custo tem três freios: limite por minuto, teto de rodadas, orçamento mensal. Bug não vira fatura.
+
+E a parte que mais importa: esses golpes viraram TESTES AUTOMÁTICOS. Toda mudança no código passa por eles de novo. Se o robô ceder, a mudança não entra no ar.
+
+Segurança de IA não é prompt bonito pedindo "por favor não faça coisas ruins". É engenharia.
+
+Os 4 ataques, slide a slide. 👇 E o código aberto no primeiro comentário.
+
+#SegurancaDaInformacao #IA #PromptInjection #Engenharia #LLM
+
+═══════════════════════════════════════════════════════════════════
+PRIMEIRO COMENTÁRIO
+═══════════════════════════════════════════════════════════════════
+
+Repo com o SECURITY.md completo (modelo de ameaças item a item): https://github.com/obragaa/atendo
+
+═══════════════════════════════════════════════════════════════════
+COMO PUBLICAR
+═══════════════════════════════════════════════════════════════════
+
+- Mídia: anexe docs\linkedin\carrossel-golpe.pdf como DOCUMENTO
+  (título sugerido: "4 ataques. 4 fracassos projetados.")
+- Quando: semana 4 do calendário (quarta-feira, 8h–10h).
+- Se alguém tentar novos "golpes" nos comentários: melhor coisa que pode
+  acontecer. Responda tecnicamente — cada tentativa é engajamento.
