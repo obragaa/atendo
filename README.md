@@ -147,3 +147,5 @@ tests/             65 testes que rodam offline
 | [SECURITY.md](SECURITY.md) | Modelo de ameaças e repasse de segurança item a item |
 | [DECISIONS.md](DECISIONS.md) | Cada decisão com a alternativa descartada e o que faria mudar de ideia |
 | [SPEC.md](SPEC.md) | A especificação que guiou a construção, fase a fase |
+| [CLAUDE.md](CLAUDE.md) · [docs/HISTORICO-SESSAO.md](docs/HISTORICO-SESSAO.md) | Briefing de retomada e o relato completo da construção |
+| [docs/linkedin/](docs/linkedin/) | Campanha de divulgação: 9 posts prontos, carrosséis e calendário |
