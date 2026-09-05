@@ -72,6 +72,11 @@ Identidade git da máquina: `Felipe Braga Duarte` · conta GitHub: **obragaa**.
 
 ## Pendências
 
+- **Pode haver commit local não publicado.** Confira com
+  `git log --oneline origin/main..main`; se listar algo, rode
+  `.\scripts\push-github.ps1` e peça ao usuário para digitar o código.
+  (O commit `05a5726`, com estes arquivos de contexto, ficou assim: o código de
+  autorização expirou antes de o usuário digitá-lo.)
 - **`ANTHROPIC_API_KEY` não está configurada.** Sem ela o `/chat` responde 503
   com instrução (comportamento projetado). Para o chat conversar de verdade:
   colar a chave em `.env` e `docker compose up -d`.
