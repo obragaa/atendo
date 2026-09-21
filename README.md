@@ -104,7 +104,7 @@ A suíte (`evals/cases/clinica-sorriso.yaml`) injeta documentos conhecidos e rod
 ```bash
 python -m venv .venv && .venv/Scripts/activate   # Windows (Linux/mac: source .venv/bin/activate)
 pip install -r requirements-dev.txt
-make test   # 65 testes, < 2 s, sem banco, sem Redis, sem chave de API
+make test   # 74 testes, < 2 s, sem banco, sem Redis, sem chave de API
 make lint   # ruff
 ```
 
@@ -135,7 +135,7 @@ app/
 evals/             runner.py + casos que bloqueiam merge
 scripts/           seed.py, ingest.py (txt/md/pdf)
 migrations/        001_init.sql (schema + RLS + role da aplicação)
-tests/             65 testes que rodam offline
+tests/             74 testes que rodam offline
 ```
 
 ## Documentação
@@ -149,3 +149,9 @@ tests/             65 testes que rodam offline
 | [SPEC.md](SPEC.md) | A especificação que guiou a construção, fase a fase |
 | [CLAUDE.md](CLAUDE.md) · [docs/HISTORICO-SESSAO.md](docs/HISTORICO-SESSAO.md) | Briefing de retomada e o relato completo da construção |
 | [docs/linkedin/](docs/linkedin/) | Campanha de divulgação: 9 posts prontos, carrosséis e calendário |
+
+---
+
+## Licença
+
+[MIT](LICENSE) © 2026 Felipe Braga Duarte
